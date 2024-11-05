@@ -1,0 +1,5 @@
+server:
+  name: "uploader"
+  host: "localhost"
+  port: 50079
+clients:

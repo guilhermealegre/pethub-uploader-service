@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^vendor/
+      - id: end-of-file-fixer
+        exclude: ^vendor/
+      - id: check-yaml
+        exclude: ^vendor/
+      - id: check-added-large-files
+        exclude: ^vendor/
+      - id: check-merge-conflict
+        exclude: ^vendor/
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-fmt
+        exclude: ^vendor/
+      - id: go-imports
+        exclude: ^vendor/
+      - id: golangci-lint
+        exclude: ^vendor/
+      - id: go-unit-tests
+        exclude: ^vendor/
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v2.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, docs, style, refactor, test, chore, imp, conf, revert, ci]

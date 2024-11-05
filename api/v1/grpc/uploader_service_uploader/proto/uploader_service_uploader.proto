@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package uploader_service_uploader;
+option go_package = "./uploader_service_uploader";
+
+// Service interface.
+service Uploader {
+  rpc ImageUploadGrpc (ImageUploadGrpcRequest) returns (ImageUploadGrpcResponse) {}
+}
+
+message ImageUploadGrpcRequest {
+  bytes image = 1;
+  string section = 2;
+  string filename =3;
+  string content_type=4;
+}
+message ImageUploadGrpcResponse {
+  string image_path = 1;
+  bytes error = 2;
+}

@@ -1,0 +1,531 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "# BeUploaderService Service API",
+    "title": "BeUploaderService Service",
+    "version": "1.0"
+  },
+  "basePath": "/v1",
+  "paths": {
+    "/alive": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "alive"
+        ],
+        "summary": "Internal service status check.",
+        "operationId": "alive",
+        "responses": {
+          "200": {
+            "description": "SwaggerAliveResponse",
+            "schema": {
+              "$ref": "#/definitions/SwaggerAliveResponse"
+            }
+          },
+          "400": {
+            "description": "ErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/p/alive/uploader": {
+      "get": {
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "alive"
+        ],
+        "summary": "Public service status check.",
+        "operationId": "public_alive",
+        "responses": {
+          "200": {
+            "description": "SwaggerPublicAliveResponse",
+            "schema": {
+              "$ref": "#/definitions/SwaggerPublicAliveResponse"
+            }
+          },
+          "400": {
+            "description": "ErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/p/uploader/image/upload": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "uploader"
+        ],
+        "summary": "Uploads an image.",
+        "operationId": "PublicImageUploadRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Section\nin: form",
+            "name": "Section",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint8"
+            },
+            "description": "Image",
+            "name": "Image",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "FileName",
+            "description": "FileName",
+            "name": "fileName",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "ContentType",
+            "description": "FileName",
+            "name": "contentType",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ImageResponse",
+            "schema": {
+              "$ref": "#/definitions/ImageResponse"
+            }
+          },
+          "400": {
+            "description": "ErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/uploader/docs": {
+      "get": {
+        "description": "Get swagger docs",
+        "produces": [
+          "text/html"
+        ],
+        "tags": [
+          "swagger"
+        ],
+        "operationId": "docs",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "ErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/uploader/image/upload": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "uploader"
+        ],
+        "summary": "Uploads an image.",
+        "operationId": "ImageUploadRequest",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Section\nin: form",
+            "name": "Section",
+            "in": "query"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint8"
+            },
+            "description": "Image",
+            "name": "Image",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "FileName",
+            "description": "FileName",
+            "name": "fileName",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "x-go-name": "ContentType",
+            "description": "FileName",
+            "name": "contentType",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ImageResponse",
+            "schema": {
+              "$ref": "#/definitions/ImageResponse"
+            }
+          },
+          "400": {
+            "description": "ErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/uploader/swagger": {
+      "get": {
+        "description": "Get swagger",
+        "produces": [
+          "text/html"
+        ],
+        "tags": [
+          "swagger"
+        ],
+        "operationId": "swagger",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "ErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Alive": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "description": "Host Name",
+          "type": "string",
+          "x-go-name": "Hostname"
+        },
+        "message": {
+          "description": "Message",
+          "type": "string",
+          "x-go-name": "Message"
+        },
+        "port": {
+          "description": "Port",
+          "type": "string",
+          "x-go-name": "Port"
+        },
+        "server_name": {
+          "description": "Server Name",
+          "type": "string",
+          "x-go-name": "ServerName"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/internal/alive/domain/v1"
+    },
+    "AliveResponse": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "description": "Host Name",
+          "type": "string",
+          "x-go-name": "Hostname"
+        },
+        "message": {
+          "description": "Message",
+          "type": "string",
+          "x-go-name": "Message"
+        },
+        "port": {
+          "description": "Port",
+          "type": "string",
+          "x-go-name": "Port"
+        },
+        "serverName": {
+          "description": "Server Name",
+          "type": "string",
+          "x-go-name": "ServerName"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "description": "Errors",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Errors"
+        },
+        "status": {
+          "description": "Status",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Status"
+        }
+      },
+      "x-go-package": "github.com/guilhermealegre/go-clean-arch-core-lib/response"
+    },
+    "ImageResponse": {
+      "type": "object",
+      "properties": {
+        "imagePath": {
+          "type": "string",
+          "x-go-name": "ImagePath"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "Links": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "description": "First",
+          "type": "string",
+          "x-go-name": "First"
+        },
+        "last": {
+          "description": "Last",
+          "type": "string",
+          "x-go-name": "Last"
+        },
+        "next": {
+          "description": "Next",
+          "type": "string",
+          "x-go-name": "Next"
+        },
+        "prev": {
+          "description": "Prev",
+          "type": "string",
+          "x-go-name": "Prev"
+        },
+        "self": {
+          "description": "Self",
+          "type": "string",
+          "x-go-name": "Self"
+        }
+      },
+      "x-go-package": "github.com/guilhermealegre/go-clean-arch-core-lib/response"
+    },
+    "Meta": {
+      "type": "object",
+      "properties": {
+        "length": {
+          "description": "Length",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Length"
+        },
+        "meta_data": {
+          "description": "MetaData",
+          "type": "object",
+          "additionalProperties": {},
+          "x-go-name": "MetaData"
+        },
+        "page_size": {
+          "description": "Page Size",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "PageSize"
+        }
+      },
+      "x-go-package": "github.com/guilhermealegre/go-clean-arch-core-lib/response"
+    },
+    "PublicAlive": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Message",
+          "type": "string",
+          "x-go-name": "Message"
+        },
+        "name": {
+          "description": "Name",
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/internal/alive/domain/v1"
+    },
+    "PublicAliveResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Message",
+          "type": "string",
+          "x-go-name": "Message"
+        },
+        "name": {
+          "description": "Name",
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "Response": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Data",
+          "x-go-name": "Data"
+        },
+        "links": {
+          "$ref": "#/definitions/Links"
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "x-go-package": "github.com/guilhermealegre/go-clean-arch-core-lib/response"
+    },
+    "SuccessResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "description": "Success",
+          "type": "boolean",
+          "x-go-name": "Success"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "SwaggerAliveResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Data",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/AliveResponse"
+        },
+        "links": {
+          "$ref": "#/definitions/Links"
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "x-go-name": "swaggerAliveResponse",
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "SwaggerPublicAliveResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Data",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/PublicAliveResponse"
+        },
+        "links": {
+          "$ref": "#/definitions/Links"
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "x-go-name": "swaggerPublicAliveResponse",
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "SwaggerSkeletonResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Data",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/AliveResponse"
+        },
+        "links": {
+          "$ref": "#/definitions/Links"
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "x-go-name": "swaggerSkeletonResponse",
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "SwaggerSuccessResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Data",
+          "x-go-name": "Data",
+          "$ref": "#/definitions/SuccessResponse"
+        },
+        "links": {
+          "$ref": "#/definitions/Links"
+        },
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      },
+      "x-go-name": "swaggerSuccessResponse",
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    },
+    "Upload": {
+      "type": "object",
+      "properties": {
+        "image_path": {
+          "type": "string",
+          "x-go-name": "ImagePath"
+        }
+      },
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/internal/image/domain/v1"
+    },
+    "UploaderResponse": {
+      "type": "object",
+      "x-go-package": "bitbucket.org/asadventure/be-uploader-service/api/v1/http/envelope/response"
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}
